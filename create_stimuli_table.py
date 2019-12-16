@@ -44,7 +44,7 @@ def create_table(table_name, block_length):
             correct = 'l'
             current_stimulus = "< < > < <"
         current_id += 1
-        emotion = choice(['sad','happy','neutral'])
+        emotion = choice(['sad.jpg','happy.jpg','neutral.jpg'])
         id.append(current_id)
         condition_name.append(condition)
         congruency.append(current_congruency)
