@@ -1,12 +1,15 @@
 % Study paradigm used in the Steenbergen, Band, & Hommel (2009) paper
 
-% clear everything:
+% clear everything
 clear all
 close all
 
 % set working directory 
 MainDir=pwd;
 cd(MainDir);
+
+% load packages
+pkg load io
 
 % set debug mode
 Debug=1;
@@ -125,8 +128,6 @@ firstBlock{trial, 7} = response
 
 end
 
-Screen('CloseAll');
-
 % instructions
 %% setup instructions
 InstructionTest = ['Veget ert a gyakorlo resz!\n'...
@@ -147,14 +148,9 @@ response = 0;
 
 while response == 0
     [keyIsDown,secs,keyCode] = KbCheck;
-    if ispc
         if (keyIsDown == 1 && keyCode(76) == 1)
             response = 1;
         end;
-    else
-        %response
-        if (keyIsDown == 1) && keyCode(15) == 1
-            response = 1;
-        end;
-    end
 end
+
+Screen('CloseAll');
