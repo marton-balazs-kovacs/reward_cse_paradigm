@@ -31,11 +31,12 @@ imageMatrix = zeros(imageHeight,imageWidth,3,numImages);
 cd('images');
 
 imageCount = 1;
+imageNames = ['happy.jpg', 'neutral.jpg', 'sad.jpg']
 
 % read images
 for image = 1:numImages
     
-    imageFileName = sprintf('image-%i-a.jpg',imageCount); % %d = double
+    imageFileName = imageNames(ImageCount);
     
     imageCount = imageCount + 1;
     
