@@ -73,7 +73,7 @@ end
 % setup practice trials (n = 24)
 %% read the trial specifications
 cd('blocks');
-practiceBlock = csvread('practiceBlock.csv')
+practiceBlock = csv2cell('practiceBlock.csv')
 cd ('..');
 
 %% number of all trials
@@ -94,15 +94,15 @@ Screen(window,'Flip');
 %% for the first test block the fixation cross is presented for 200 ms
 WaitSecs(0.2);
 
-%%% draw stimuli
-DrawFormattedText(window, practiceBlock{trial, 1} , 100, 'center');
+%% draw stimuli
+DrawFormattedText(window, practiceBlock(trial, 1) , 100, 'center');
 Screen(window,'Flip');
 KbWait();
 
-%%% set original response value for loop 
+%% set original response value for loop 
 response = NaN;
 
-%%% keyboard wait to continue
+%% keyboard wait to continue
   while (isnan(response))
     
     [keyIsDown,secs,keyCode]=KbCheck;
@@ -120,7 +120,7 @@ Screen('DrawTexture',window, Smiley,[],ScreenRect);
 Screen(window,'Flip');
 WaitSecs(0.5);
 
-%%% save response in the trial spec
+%% save response in the trial spec
 firstBlock{trial, 7} = response
 
 end
@@ -157,178 +157,4 @@ while response == 0
             response = 1;
         end;
     end
-end
-
-% first test block (n = 204)
-%% read the trial specifications
-cd('blocks');
-firstBlock = csvread('firstBlock.csv')
-cd ('..');
-
-%% number of all trials
-numTrials = 204;
-
-%% running the first test block
-for trial = 1:numTrials
-
-%% draw fixation cross
-fixLineLength = 20;
-HLine = [ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
-VLine = [ScreenWidth/2, ScreenHeight/2-fixLineLength, ScreenWidth/2, ScreenHeight/2+fixLineLength];
-FixLineWidth = 2;
-Screen('DrawLine', window, [0 0 0], HLine(1),HLine(2),HLine(3),HLine(4),FixLineWidth);
-Screen('DrawLine', window, [0 0 0], VLine(1),VLine(2),VLine(3),VLine(4),FixLineWidth);
-Screen(window,'Flip');
-
-%% for the first test block the fixation cross is presented for 200 ms
-WaitSecs(0.2);
-
-%%% draw stimuli
-Screen('DrawText', window, firstBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
-Screen(window,'Flip');
-KbWait();
-
-%%% set original response value for loop 
-response = NaN;
-
-%%% keyboard wait to continue
-  while (isnan(response))
-    
-    [keyIsDown,secs,keyCode]=KbCheck;
- 
-      if (keyCode(left_key)==1) 
-        response='k';
-      elseif(keyCode(right_key)==1) 
-        response='l';
-      end;
-    end;
-
-%%% save response in the trial spec
-firstBlock{trial, 7} = response
-
-%% draw smiley
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
-Screen('DrawTexture',window, Smiley,[],ScreenRect); 
-Screen(window,'Flip');
-WaitSecs(0.5);
-
-end
-
-% break screen (40 sec)
-Screen('FillRect', window [255 255 255] [] );
-Screen(window,'Flip');
-WaitSecs(40);
-
-% second test block (n = 204)
-%% read the trial specifications
-secondBlock = csvread('secondBlock.csv')
-cd ('..');
-
-%% number of all trials
-numTrials = 204;
-
-%% running the second test block
-for trial = 1:numTrials
-  
-%% draw fixation cross
-fixLineLength=20;
-HLine=[ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
-VLine=[ScreenWidth/2, ScreenHeight/2-fixLineLength, ScreenWidth/2, ScreenHeight/2+fixLineLength];
-FixLineWidth=2;
-Screen('DrawLine', window, [0 0 0], HLine(1),HLine(2),HLine(3),HLine(4),FixLineWidth);
-Screen('DrawLine', window, [0 0 0], VLine(1),VLine(2),VLine(3),VLine(4),FixLineWidth);
-Screen(window,'Flip');
-
-%% for the second test block the fixation cross is presented for 300 ms
-WaitSecs(0.3);
-
-%%% draw stimuli
-Screen('DrawText', window, secondBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
-Screen(window,'Flip');
-KbWait();
-
-%%% set original response value for loop 
-response = NaN;
-
-%%% keyboard wait to continue
-  while (isnan(response))
-    
-    [keyIsDown,secs,keyCode]=KbCheck;
- 
-      if (keyCode(left_key)==1) 
-        response='k';
-      elseif(keyCode(right_key)==1) 
-        response='l';
-      end;
-    end;
-
-%%% save response in the trial spec
-secondBlock{trial, 7} = response
-
-%% draw smiley
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
-Screen('DrawTexture',window, Smiley,[],ScreenRect); 
-Screen(window,'Flip');
-WaitSecs(0.5);
-
-end
-
-% break screen (40 sec)
-Screen('FillRect', window [255 255 255] [] );
-Screen(window,'Flip');
-WaitSecs(40);
-
-% third test block (n = 204)
-%% read the trial specifications
-cd('blocks');
-thirdBlock = csvread('thirdBlock.csv')
-cd ('..');
-
-%% number of all trials
-numTrials = 204;
-
-%% running the third test block
-for trial = 1:numTrials
-  
-%% draw fixation cross
-fixLineLength=20;
-HLine=[ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
-VLine=[ScreenWidth/2, ScreenHeight/2-fixLineLength, ScreenWidth/2, ScreenHeight/2+fixLineLength];
-FixLineWidth=2;
-Screen('DrawLine', window, [0 0 0], HLine(1),HLine(2),HLine(3),HLine(4),FixLineWidth);
-Screen('DrawLine', window, [0 0 0], VLine(1),VLine(2),VLine(3),VLine(4),FixLineWidth);
-Screen(window,'Flip');
-
-%% for the third test block the fixation cross is presented for 400 ms
-WaitSecs(0.4);
-
-%%% draw stimuli
-Screen('DrawText', window, thirdBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
-Screen(window,'Flip');
-KbWait();
-
-%%% set original response value for loop 
-response = NaN;
-
-%%% keyboard wait to continue
-  while (isnan(response))
-    
-    [keyIsDown,secs,keyCode]=KbCheck;
- 
-      if (keyCode(left_key)==1) 
-        response='k';
-      elseif(keyCode(right_key)==1) 
-        response='l';
-      end;
-    end;
-
-%%% save response in the trial spec
-thirdBlock{trial, 7} = response
-
-%% draw smiley
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
-Screen('DrawTexture',window, Smiley,[],ScreenRect); 
-Screen(window,'Flip');
-WaitSecs(0.5);
-
 end
