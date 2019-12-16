@@ -13,15 +13,18 @@ Debug=1;
 
 % screen and color setup
 whichScreen = max(Screen('Screens'));
-ScreenWidth = ScreenRect(1,3);
-ScreenHeight = ScreenRect(1,4);
-SceneWidth = 200;
-SceneHeight = 200;
 whiteColor = [255, 255, 255]; %white
 grayColor = [192, 192, 192]; % gray
 blackColor = [0 0 0]; %black
 
+Screen('Preference', 'SkipSyncTests', 1);
+
 [window,ScreenRect] = Screen(0,'OpenWindow',whiteColor,[0 0 500 500]);
+
+ScreenWidth = ScreenRect(1,3);
+ScreenHeight = ScreenRect(1,4);
+SceneWidth = 200;
+SceneHeight = 200;
 
 % image setup
 numImages = 3;
@@ -36,7 +39,7 @@ imageNames = ['happy.jpg', 'neutral.jpg', 'sad.jpg']
 % read images
 for image = 1:numImages
     
-    imageFileName = imageNames(ImageCount);
+    imageFileName = imageNames(imageCount);
     
     imageCount = imageCount + 1;
     
