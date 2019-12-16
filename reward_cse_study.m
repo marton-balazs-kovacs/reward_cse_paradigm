@@ -98,7 +98,7 @@ Screen(window,'Flip');
 WaitSecs(0.2);
 
 %% draw stimuli
-DrawFormattedText(window, practiceBlock(trial, 1) , 100, 'center');
+DrawFormattedText(window, char(practiceBlock(trial, 5)), 100, 'center');
 Screen(window,'Flip');
 KbWait();
 
