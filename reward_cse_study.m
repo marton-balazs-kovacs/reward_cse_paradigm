@@ -119,7 +119,7 @@ response = NaN;
     end;
 
 %% draw smiley
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
+Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,practiceBlock(trial, 6)));
 Screen('DrawTexture',window, Smiley,[],ScreenRect); 
 Screen(window,'Flip');
 WaitSecs(0.5);
