@@ -132,9 +132,11 @@ Screen(window,'Flip');
 WaitSecs(0.5);
 
 %% save response in the trial spec
-firstBlock{trial, 7} = response
+practiceBlockResponse{trial, 7} = response
 
 end
+
+cell2csv('output_data.csv', practiceBlockResponse)
 
 % instructions
 %% setup instructions
