@@ -120,11 +120,11 @@ response = NaN;
 
 %% draw smiley
 if (strncmp(practiceBlock(trial, 6), 'sad.jpg', 1) == 1)
-  Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,3));
+  Smiley = Screen('MakeTexture', window, imageMatrix(3,1));
 elseif (strncmp(practiceBlock(trial, 6), 'happy.jpg', 1) == 1)
-  Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,1));
+  Smiley = Screen('MakeTexture', window, imageMatrix(1,1));
 elseif (strncmp(practiceBlock(trial, 6), 'neutral.jpg', 1) == 1)
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,2));
+Smiley = Screen('MakeTexture', window, imageMatrix(2,1));
 end;
 
 Screen('DrawTexture',window, Smiley,[],ScreenRect); 
