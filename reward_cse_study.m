@@ -11,6 +11,10 @@ cd(MainDir);
 % set debug mode
 Debug=1;
 
+% setup variables
+left_key = KbName('k');
+right_key = KbName('l');
+
 % screen and color setup
 whichScreen = max(Screen('Screens'));
 whiteColor = [255, 255, 255]; %white
@@ -66,17 +70,62 @@ while response == 0
         end;
 end
 
-Screen('CloseAll');
-
 % setup practice trials (n = 24)
 %% read the trial specifications
 cd('blocks');
 practiceBlock = csvread('practiceBlock.csv')
 cd ('..');
 
-%% draw flanker
-left_key = KbName('k');
-right_key = KbName('l');
+%% number of all trials
+numTrials = 24;
+
+%% running the practice block
+for trial = 1:numTrials
+
+%% draw fixation cross
+fixLineLength = 20;
+HLine = [ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
+VLine = [ScreenWidth/2, ScreenHeight/2-fixLineLength, ScreenWidth/2, ScreenHeight/2+fixLineLength];
+FixLineWidth = 2;
+Screen('DrawLine', window, [0 0 0], HLine(1),HLine(2),HLine(3),HLine(4),FixLineWidth);
+Screen('DrawLine', window, [0 0 0], VLine(1),VLine(2),VLine(3),VLine(4),FixLineWidth);
+Screen(window,'Flip');
+
+%% for the first test block the fixation cross is presented for 200 ms
+WaitSecs(0.2);
+
+%%% draw stimuli
+DrawFormattedText(window, practiceBlock{trial, 1} , 100, 'center');
+Screen(window,'Flip');
+KbWait();
+
+%%% set original response value for loop 
+response = NaN;
+
+%%% keyboard wait to continue
+  while (isnan(response))
+    
+    [keyIsDown,secs,keyCode]=KbCheck;
+ 
+      if (keyCode(left_key)==1) 
+        response='k';
+      elseif(keyCode(right_key)==1) 
+        response='l';
+      end;
+    end;
+
+%% draw smiley
+Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
+Screen('DrawTexture',window, Smiley,[],ScreenRect); 
+Screen(window,'Flip');
+WaitSecs(0.5);
+
+%%% save response in the trial spec
+firstBlock{trial, 7} = response
+
+end
+
+Screen('CloseAll');
 
 % instructions
 %% setup instructions
@@ -133,10 +182,6 @@ Screen(window,'Flip');
 
 %% for the first test block the fixation cross is presented for 200 ms
 WaitSecs(0.2);
-
-%% draw flanker
-left_key = KbName('k');
-right_key = KbName('l');
 
 %%% draw stimuli
 Screen('DrawText', window, firstBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
@@ -197,10 +242,6 @@ Screen(window,'Flip');
 %% for the second test block the fixation cross is presented for 300 ms
 WaitSecs(0.3);
 
-%% draw flanker
-left_key = KbName('k');
-right_key = KbName('l');
-
 %%% draw stimuli
 Screen('DrawText', window, secondBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
 Screen(window,'Flip');
@@ -260,10 +301,6 @@ Screen(window,'Flip');
 
 %% for the third test block the fixation cross is presented for 400 ms
 WaitSecs(0.4);
-
-%% draw flanker
-left_key = KbName('k');
-right_key = KbName('l');
 
 %%% draw stimuli
 Screen('DrawText', window, thirdBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
