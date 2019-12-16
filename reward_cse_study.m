@@ -70,7 +70,9 @@ Screen('CloseAll');
 
 % setup practice trials (n = 24)
 %% read the trial specifications
-practiceBlock = readtable('practiceBlock.csv')
+cd('blocks');
+practiceBlock = csvread('practiceBlock.csv')
+cd ('..');
 
 %% draw flanker
 left_key = KbName('k');
@@ -110,7 +112,9 @@ end
 
 % first test block (n = 204)
 %% read the trial specifications
-firstBlock = readtable('blocks/firstBlock.csv')
+cd('blocks');
+firstBlock = csvread('firstBlock.csv')
+cd ('..');
 
 %% number of all trials
 numTrials = 204;
@@ -172,7 +176,8 @@ WaitSecs(40);
 
 % second test block (n = 204)
 %% read the trial specifications
-secondBlock = readtable('blocks/secondBlock.csv')
+secondBlock = csvread('secondBlock.csv')
+cd ('..');
 
 %% number of all trials
 numTrials = 204;
@@ -234,7 +239,9 @@ WaitSecs(40);
 
 % third test block (n = 204)
 %% read the trial specifications
-thirdBlock = readtable('blocks/thirdBlock.csv')
+cd('blocks');
+thirdBlock = csvread('thirdBlock.csv')
+cd ('..');
 
 %% number of all trials
 numTrials = 204;
