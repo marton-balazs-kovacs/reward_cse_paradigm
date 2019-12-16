@@ -40,6 +40,7 @@ for i=1:size(images, 1)
   imageFileName = images(i).name;
   [img] = imread(imageFileName);
   imageMatrix{i,1} = img(:,:,:);
+  imageMatrix{i,2} = imageFileName;
 end;
 
 cd ('..');
