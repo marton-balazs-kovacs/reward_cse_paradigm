@@ -34,20 +34,17 @@ imageMatrix = zeros(imageHeight,imageWidth,3,numImages);
 cd('images');
 
 imageCount = 1;
-imageNames = ['happy.jpg', 'neutral.jpg', 'sad.jpg']
+imageNames = ['happy.jpg'; 'neutral.jpg'; 'sad.jpg']
 
 % read images
 for image = 1:numImages
     
-    imageFileName = imageNames(imageCount);
+    imageFileName = imageNames(imageCount, :);
     
     imageCount = imageCount + 1;
     
-    
-    
     [img] = imread(imageFileName);
     imageMatrix(:,:,1:3,image) = img(:,:,:);
-   
     
 end
 
