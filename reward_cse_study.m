@@ -23,30 +23,17 @@ Screen('Preference', 'SkipSyncTests', 1);
 
 ScreenWidth = ScreenRect(1,3);
 ScreenHeight = ScreenRect(1,4);
-SceneWidth = 200;
-SceneHeight = 200;
-
-% image setup
-numImages = 3;
-imageWidth = 1024;
-imageHeight = 768;
-imageMatrix = zeros(imageHeight,imageWidth,3,numImages);
-cd('images');
-
-imageCount = 1;
-imageNames = ['happy.jpg'; 'neutral.jpg'; 'sad.jpg']
 
 % read images
-for image = 1:numImages
-    
-    imageFileName = imageNames(imageCount, :);
-    
-    imageCount = imageCount + 1;
-    
-    [img] = imread(imageFileName);
-    imageMatrix(:,:,1:3,image) = img(:,:,:);
-    
-end
+cd('images');
+images=dir([pwd, '/*.jpg']);
+
+for i=1:size(images, 1)
+
+  imageFileName = images(i).name;
+  [img] = imread(imageFileName);
+  imageMatrix{i,1} = img(:,:,:);
+end;
 
 cd ('..');
 
