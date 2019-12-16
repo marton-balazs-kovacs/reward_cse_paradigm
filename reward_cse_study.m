@@ -86,7 +86,12 @@ while response == 0
 end
 
 % setup practice trials (n = 24)
+%% draw flanker
+left_key = KbName('k');
+right_key = KbName('l');
 
+%%% read the trial specifications
+practiceFlanker = readtable('practiceFlanker.csv')
 
 % instructions
 %% setup instructions
@@ -137,6 +142,8 @@ WaitSecs(0.2);
 left_key = KbName('k');
 right_key = KbName('l');
 
+%%% read the trial specifications
+firstFlanker = readtable('firstFlanker.csv')
 
 
 % break screen (max 40 sec)
@@ -154,6 +161,11 @@ Screen(window,'Flip');
 WaitSecs(0.3);
 
 %% draw flanker
+left_key = KbName('k');
+right_key = KbName('l');
+
+%%% read the trial specifications
+secondFlanker = readtable('secondFlanker.csv')
 
 %% draw smiley
 Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,1));
@@ -175,4 +187,9 @@ Screen(window,'Flip');
 %% for the third test block the fixation cross is presented for 400 ms
 WaitSecs(0.4);
 
-% filler block (n = 24)
+%% draw flanker
+left_key = KbName('k');
+right_key = KbName('l');
+
+%%% read the trial specifications
+thirdFlanker = readtable('thirdFlanker.csv')
