@@ -86,12 +86,12 @@ while response == 0
 end
 
 % setup practice trials (n = 24)
+%% read the trial specifications
+practiceBlock = readtable('practiceBlock.csv')
+
 %% draw flanker
 left_key = KbName('k');
 right_key = KbName('l');
-
-%%% read the trial specifications
-practiceFlanker = readtable('practiceFlanker.csv')
 
 % instructions
 %% setup instructions
@@ -126,6 +126,15 @@ while response == 0
 end
 
 % first test block (n = 204)
+%% read the trial specifications
+firstBlock = readtable('firstBlock.csv')
+
+%% number of all trials
+numTrials = 204;
+
+%% running the first test block
+for trial = 1:numTrials
+
 %% draw fixation cross
 fixLineLength = 20;
 HLine = [ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
@@ -142,12 +151,52 @@ WaitSecs(0.2);
 left_key = KbName('k');
 right_key = KbName('l');
 
-%%% read the trial specifications
-firstFlanker = readtable('firstFlanker.csv')
+%%% draw stimuli
+Screen('DrawText', window, firstBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
+Screen(window,'Flip');
+KbWait();
 
+%%% set original response value for loop 
+response = NaN;
 
-% break screen (max 40 sec)
+%%% keyboard wait to continue
+  while (isnan(response))
+    
+    [keyIsDown,secs,keyCode]=KbCheck;
+ 
+      if (keyCode(left_key)==1) 
+        response='k';
+      elseif(keyCode(right_key)==1) 
+        response='l';
+      end;
+    end;
+
+%%% save response in the trial spec
+firstBlock{trial, 7} = response
+
+%% draw smiley
+Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
+Screen('DrawTexture',window, Smiley,[],ScreenRect); 
+Screen(window,'Flip');
+WaitSecs(0.5);
+
+end
+
+% break screen (40 sec)
+Screen('FillRect', window [255 255 255] [] );
+Screen(window,'Flip');
+WaitSecs(40);
+
 % second test block (n = 204)
+%% read the trial specifications
+secondBlock = readtable('secondBlock.csv')
+
+%% number of all trials
+numTrials = 204;
+
+%% running the second test block
+for trial = 1:numTrials
+  
 %% draw fixation cross
 fixLineLength=20;
 HLine=[ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
@@ -164,17 +213,52 @@ WaitSecs(0.3);
 left_key = KbName('k');
 right_key = KbName('l');
 
-%%% read the trial specifications
-secondFlanker = readtable('secondFlanker.csv')
+%%% draw stimuli
+Screen('DrawText', window, secondBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
+Screen(window,'Flip');
+KbWait();
+
+%%% set original response value for loop 
+response = NaN;
+
+%%% keyboard wait to continue
+  while (isnan(response))
+    
+    [keyIsDown,secs,keyCode]=KbCheck;
+ 
+      if (keyCode(left_key)==1) 
+        response='k';
+      elseif(keyCode(right_key)==1) 
+        response='l';
+      end;
+    end;
+
+%%% save response in the trial spec
+secondBlock{trial, 7} = response
 
 %% draw smiley
-Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,1));
-Screen('DrawTexture',window, Smiley,[],SceneRect); 
+Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
+Screen('DrawTexture',window, Smiley,[],ScreenRect); 
 Screen(window,'Flip');
 WaitSecs(0.5);
 
-% break screen (max 40 sec)
+end
+
+% break screen (40 sec)
+Screen('FillRect', window [255 255 255] [] );
+Screen(window,'Flip');
+WaitSecs(40);
+
 % third test block (n = 204)
+%% read the trial specifications
+thirdBlock = readtable('thirdBlock.csv')
+
+%% number of all trials
+numTrials = 204;
+
+%% running the third test block
+for trial = 1:numTrials
+  
 %% draw fixation cross
 fixLineLength=20;
 HLine=[ScreenWidth/2-fixLineLength, ScreenHeight/2, ScreenWidth/2+fixLineLength, ScreenHeight/2];
@@ -191,5 +275,33 @@ WaitSecs(0.4);
 left_key = KbName('k');
 right_key = KbName('l');
 
-%%% read the trial specifications
-thirdFlanker = readtable('thirdFlanker.csv')
+%%% draw stimuli
+Screen('DrawText', window, thirdBlock{trial, 1} [0] [0] [0 0 0] [255 255 255]);
+Screen(window,'Flip');
+KbWait();
+
+%%% set original response value for loop 
+response = NaN;
+
+%%% keyboard wait to continue
+  while (isnan(response))
+    
+    [keyIsDown,secs,keyCode]=KbCheck;
+ 
+      if (keyCode(left_key)==1) 
+        response='k';
+      elseif(keyCode(right_key)==1) 
+        response='l';
+      end;
+    end;
+
+%%% save response in the trial spec
+thirdBlock{trial, 7} = response
+
+%% draw smiley
+Smiley = Screen('MakeTexture', window, imageMatrix(:,:,:,trial));
+Screen('DrawTexture',window, Smiley,[],ScreenRect); 
+Screen(window,'Flip');
+WaitSecs(0.5);
+
+end
