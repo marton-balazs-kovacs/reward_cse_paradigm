@@ -127,7 +127,7 @@ end
 
 % first test block (n = 204)
 %% read the trial specifications
-firstBlock = readtable('firstBlock.csv')
+firstBlock = readtable('blocks/firstBlock.csv')
 
 %% number of all trials
 numTrials = 204;
@@ -189,7 +189,7 @@ WaitSecs(40);
 
 % second test block (n = 204)
 %% read the trial specifications
-secondBlock = readtable('secondBlock.csv')
+secondBlock = readtable('blocks/secondBlock.csv')
 
 %% number of all trials
 numTrials = 204;
@@ -251,7 +251,7 @@ WaitSecs(40);
 
 % third test block (n = 204)
 %% read the trial specifications
-thirdBlock = readtable('thirdBlock.csv')
+thirdBlock = readtable('blocks/thirdBlock.csv')
 
 %% number of all trials
 numTrials = 204;
